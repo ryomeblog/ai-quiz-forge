@@ -1,0 +1,9 @@
+{
+  "appId": "dev.ryome.aiquizforge",
+  "appName": "AI Quiz Forge",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}
