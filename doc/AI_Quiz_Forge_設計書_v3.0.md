@@ -38,7 +38,9 @@ AIがWeb検索を行い、最新情報に基づいた選択式クイズを自動
 - 未回答のまま「次へ」「回答する」進行可能（未回答は不正解として扱う）
 - プレイ中の途中離脱（ボトムナビ操作等）時は**確認ダイアログ**を表示し、承諾時にプレイデータを破棄
 - 「もう一度」: 同じ出題数で純粋にランダム再抽出（前回との重複回避なし）
-- 全問正解履歴のある試験はホーム画面で★マーク表示（問題が追加されると★は消える）
+- 全問正解履歴のある試験はホーム画面で★マーク表示（**任意のプレイで100%**を1度でも達成すると付与。問題の追加・編集・削除いずれでも★は消える）
+- 総問題数が5未満の試験はスライダー非表示、出題数=総問題数で固定
+- プレイ中のリロード・ブラウザバック・アプリバックグラウンド時はプレイデータを破棄してホームに戻る（MVPでは復元しない）
 - localStorage保存、JSONエクスポート/インポート対応（インポートは**上書き固定**）
 - 全画面にボトムナビゲーション（ホーム/履歴/設定）
 
@@ -61,6 +63,7 @@ AIがWeb検索を行い、最新情報に基づいた選択式クイズを自動
 | AI | Anthropic / OpenAI / OpenRouter | 問題生成+Web検索 |
 | データ | localStorage | 永続化 |
 | ルーティング | React Router v6 | 画面遷移 |
+| バリデーション | zod | AI出力・インポートJSONのスキーマ検証 |
 | リンター | ESLint 9+ | コード品質 |
 | フォーマッター | Prettier | ダブルクォート・保存時自動 |
 
@@ -97,8 +100,9 @@ AIがWeb検索を行い、最新情報に基づいた選択式クイズを自動
 - 「+ 新しい試験を作成」ボタン → S-002a
 - 各試験カードに以下を表示:
   - タイトル、全問題数、作成日、前回正答率（**この試験の最新プレイのスコア**。未プレイ時は非表示）
-  - 全問正解履歴がある試験はタイトル横に★マーク表示（問題追加時に★は自動で消える）
-  - 出題数スライダー（**5刻み**。範囲は5〜総問題数、末尾は総問題数ピッタリ。デフォルト10、総問題数が5未満の場合は総問題数）
+  - 全問正解履歴がある試験はタイトル横に★マーク表示（任意のプレイで100%達成で付与。問題の追加・編集・削除いずれでも★は自動で消える）
+  - 出題数スライダー（**5刻み**。範囲は5〜総問題数、末尾は総問題数ピッタリ。デフォルト10）
+  - 総問題数が5未満の場合はスライダー非表示、出題数=総問題数で固定表示
   - 「スタート ▶」ボタン → S-005へ遷移
   - 「編集」ボタン → S-002b（試験タイトル・説明の編集）
   - 「問題」ボタン → S-003（問題管理画面）
@@ -146,7 +150,8 @@ AIがWeb検索を行い、最新情報に基づいた選択式クイズを自動
 - 各問題を問題文（20文字+「...」）のアコーディオンで表示
 - 展開時: 問題文全文、全選択肢箇条書き、正解=緑背景
 - 各問題に「編集」「破棄」ボタン（「追加」ボタンは不要）
-- 「編集」ボタン: **S-003b（問題編集画面）に遷移**。保存時にプレビュー配列内の該当問題へ反映（インライン編集なし。未登録データはメモリ/一時ストレージで保持）
+- 「編集」ボタン: **S-003b（問題編集画面）にクエリ付きで遷移**（例: `/exams/:id/questions/edit?source=preview&index=3`）。保存時にプレビュー配列内の該当問題へ反映（インライン編集なし）
+- プレビュー配列は **ExamContext ではなく専用の Context（メモリのみ）** で保持。S-003から他画面（履歴・ホーム・設定等）に遷移したタイミングでプレビューはクリアする（セッション跨ぎの復元はしない）
 - 「すべて登録」ボタンで一括登録
 
 **▶ 既存問題リスト（タブ外側に常時表示）:**
@@ -183,6 +188,7 @@ AIがWeb検索を行い、最新情報に基づいた選択式クイズを自動
 - 問題ごとに選択肢数が異なるがUIは動的に対応
 - 「正解は結果画面で確認できます」のガイドテキスト
 - 途中離脱（ボトムナビ等で移動）時は**確認ダイアログ**を表示。承諾時にプレイデータを破棄
+- ブラウザリロード・バックボタン・アプリバックグラウンド時もプレイデータを破棄してホームに戻る（復元しない）
 
 #### 2.3.6 S-006 結果画面
 
@@ -278,12 +284,13 @@ S-001 → S-005（プレイ） → S-006（結果） → S-001
 |------------|-----|------|
 | questionId | string | 問題ID |
 | questionText | string | 問題文スナップショット |
-| choices | Choice[] | 全選択肢スナップショット |
-| selectedChoiceIds | string[] | ユーザー選択 |
+| choices | Choice[] | 全選択肢スナップショット（**プレイ時にユーザーに提示されたシャッフル後の順序**で保存） |
+| selectedChoiceIds | string[] | ユーザー選択（未回答の場合は空配列） |
 | correctChoiceIds | string[] | 正解ID |
-| isCorrect | boolean | 正解か |
+| isCorrect | boolean | 正解か（未回答は不正解扱い） |
 
 > ※ AnswerRecordに問題文・選択肢・正解のスナップショットを保持。元の試験が削除されても履歴画面で完全な回答詳細を表示可能。
+> ※ `choices` は**シャッフル後**の順序で保存することで、履歴画面でプレイ時の画面を再現する。
 
 ### 3.6 localStorageキー
 
@@ -324,10 +331,12 @@ S-001 → S-005（プレイ） → S-006（結果） → S-001
 | エンドポイント | api.anthropic.com/v1/messages | api.openai.com/v1/chat/completions | openrouter.ai/api/v1/chat/completions |
 | 認証 | x-api-key + `anthropic-dangerous-direct-browser-access: true` | Authorization: Bearer (`dangerouslyAllowBrowser: true`) | Authorization: Bearer + Referer |
 | デフォルトモデル | claude-opus-4-6 | gpt-4o（最新版に追随） | ユーザー指定（例: google/gemini-2.5-pro） |
-| Web検索 | web_searchツール（常時ON） | web_search_previewツール（常時ON） | `:online` サフィックス等モデル依存（常時ON） |
+| Web検索 | web_searchツール（常時ON） | web_search_previewツール（常時ON） | モデル名に `:online` サフィックスを自動付与して常時ON |
 | レスポンス | content[].text | choices[0].message.content | choices[0].message.content |
 
 > ※ API呼び出しはブラウザから直接実行する（個人利用前提）。APIキーはlocalStorageに平文保存されるため、本アプリを共有端末で使用しないこと。
+> ※ ネイティブ環境（Capacitor iOS / Android）では `@capacitor/http`（CapacitorHttp）経由で呼び出してCORSを回避する。Web環境では通常の `fetch` + dangerousフラグを使用。プロバイダー抽象化層（5.1）の下に**HTTPクライアント抽象化層**を設け、環境（`Capacitor.isNativePlatform()`）で切り替える。
+> ※ OpenRouterではユーザー指定モデル名に `:online` サフィックスが付いていない場合、自動で付与してWeb検索を有効化する。
 
 ### 4.2 AI生成パラメータ
 
@@ -355,37 +364,229 @@ AIProviderインターフェースで差異を吸収:
 
 ### 4.4 レスポンスJSONスキーマ
 
-全プロバイダー共通の期待形式:
+→ 詳細は [4.7 構造化出力スキーマ](#47-構造化出力スキーマ全プロバイダー共通契約) を参照。全プロバイダーは共通の `{ questions: [...] }` 形式で返すよう誘導し、フロントエンドでUUID付与・`isMultiSelect` 自動判定を行う。
+
+### 4.5 エラーハンドリング
+
+| エラー種別 | 判定 | UI動作 |
+|------------|------|------|
+| APIキー未設定 | Provider初期化時に検知 | 設定画面へのリンク付きトースト |
+| 401 Unauthorized | HTTP status | 「APIキー（{provider名}）が無効です」＋設定画面リンク |
+| 429 Rate Limit | HTTP status | 「レート制限。しばらく待って再試行」＋リトライボタン |
+| 500 Server Error | HTTP status | 再試行ボタン付きエラー |
+| ネットワークエラー | fetch catch | オフライン検知しエラー表示 |
+| Web検索失敗 | レスポンス内tool_useエラー／空の検索結果 | AI生成タブ上部にエラーバナー（「検索に失敗しました。時間をおいて再試行してください」）＋ 再試行ボタン。**問題は生成しない** |
+| JSONパース失敗 | try/catch | 「生成結果の解析に失敗。再生成してください」 |
+| スキーマ不一致 | zodバリデーション | 同上（再生成誘導） |
+| タイムアウト | 60秒経過 | 「タイムアウトしました」＋再試行ボタン |
+
+### 4.6 通信アーキテクチャ
+
+```
+UI (S-003 AI生成タブ)
+   ↓ useAIGenerate フック呼び出し
+useAIGenerate(params)
+   ↓ getProvider(providerName) でインスタンス取得
+AIProvider (Anthropic / OpenAI / OpenRouter)
+   ↓ buildRequest(params) でペイロード生成
+httpClient.request(config)
+   ├─ Web:    fetch() + dangerousフラグ
+   └─ Native: CapacitorHttp.request()
+   ↓ レスポンス
+parseResponse(raw) → { questions: [...] }
+   ↓ zod でスキーマバリデーション
+   ↓ UUID付与、isMultiSelect を正解数から自動計算
+AIPreviewContext にセット
+```
+
+**共通のバリデーション:**
+- `questions.length === 指定問題数`（不一致時は再生成）
+- 各問題の `choices.length === 指定選択肢数`
+- 各問題に `isCorrect: true` が最低1つ
+- `isMultiSelect` はクライアント側で正解数から自動計算（2以上で複数選択）
+
+**実装ポリシー:**
+- ストリーミングは使用せず、生成完了まではローディングスピナー
+- タイムアウトは 60 秒（Web検索を含むため長め）
+- バリデーションは `zod` を採用
+
+### 4.7 構造化出力スキーマ（全プロバイダー共通契約）
 
 ```json
 {
-  "questions": [
-    {
-      "text": "問題文",
-      "choices": [
-        { "text": "選択肢", "isCorrect": true },
-        { "text": "選択肢", "isCorrect": false }
-      ],
-      "isMultiSelect": false,
-      "explanation": "解説文"
+  "type": "object",
+  "properties": {
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": { "type": "string" },
+          "choices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": { "type": "string" },
+                "isCorrect": { "type": "boolean" }
+              },
+              "required": ["text", "isCorrect"]
+            }
+          },
+          "explanation": { "type": "string" }
+        },
+        "required": ["text", "choices", "explanation"]
+      }
     }
+  },
+  "required": ["questions"]
+}
+```
+
+> ※ AI出力には `isMultiSelect` を含めない。クライアント側で正解数から自動判定する。
+> ※ フロントエンドでUUIDを付与し、`Question` オブジェクトに変換する。
+
+### 4.8 プロバイダー別リクエスト/レスポンス仕様
+
+#### 4.8.1 Anthropic
+
+```http
+POST https://api.anthropic.com/v1/messages
+x-api-key: {apiKey}
+anthropic-version: 2023-06-01
+anthropic-dangerous-direct-browser-access: true
+content-type: application/json
+
+{
+  "model": "claude-opus-4-6",
+  "max_tokens": 8192,
+  "tools": [
+    { "type": "web_search_20250305", "name": "web_search", "max_uses": 3 }
+  ],
+  "system": "<システムプロンプト>",
+  "messages": [
+    { "role": "user", "content": "<ユーザープロンプト>" }
   ]
 }
 ```
 
-フロントエンドでUUIDを付与し、Questionオブジェクトに変換する。
+**レスポンスパース:**
+- `content[]` から最後の `type: "text"` ブロックを取得
+- テキスト内の最初の ```` ```json ... ``` ```` ブロック、なければ最初の `{...}` を抽出してJSON.parse
+- 失敗時は再生成エラー
 
-### 4.5 エラーハンドリング
+#### 4.8.2 OpenAI（Responses API）
 
-| エラー種別 | 対応 |
-|------------|------|
-| APIキー未設定 | 設定画面へ誘導するトースト |
-| 401 Unauthorized | APIキーが無効 / プロバイダー名を含めたエラー表示 |
-| 429 Rate Limit | リトライボタン付きエラー |
-| 500 Server Error | 再試行ボタン付きエラー |
-| JSONパース失敗 | 再生成ボタン付きエラー |
-| ネットワークエラー | オフライン検知しエラー表示 |
-| Web検索失敗 | 問題を生成せず、AI生成タブ上部にエラーバナーを表示（「検索に失敗しました。時間をおいて再試行してください」） |
+Web検索ツール（`web_search_preview`）は Responses API 専用のため、`/v1/chat/completions` ではなく `/v1/responses` を使用する。
+
+```http
+POST https://api.openai.com/v1/responses
+Authorization: Bearer {apiKey}
+content-type: application/json
+
+{
+  "model": "gpt-4o",
+  "tools": [{ "type": "web_search_preview" }],
+  "input": [
+    { "role": "system", "content": "<システムプロンプト>" },
+    { "role": "user",   "content": "<ユーザープロンプト>" }
+  ],
+  "text": {
+    "format": {
+      "type": "json_schema",
+      "name": "quiz_questions",
+      "schema": { /* 4.7 のスキーマ */ },
+      "strict": true
+    }
+  }
+}
+```
+
+**レスポンスパース:** `output_text` もしくは `output[].content[].text` からJSONを取得し JSON.parse。構造化出力により整形済みのため通常そのままパース可能。
+
+#### 4.8.3 OpenRouter
+
+```http
+POST https://openrouter.ai/api/v1/chat/completions
+Authorization: Bearer {apiKey}
+HTTP-Referer: https://<github-pages-url>
+X-Title: AI Quiz Forge
+content-type: application/json
+
+{
+  "model": "google/gemini-2.5-pro:online",
+  "messages": [
+    { "role": "system", "content": "<システムプロンプト>" },
+    { "role": "user",   "content": "<ユーザープロンプト>" }
+  ],
+  "response_format": { "type": "json_object" }
+}
+```
+
+- ユーザーがモデル名に `:online` を付けていない場合、クライアント側で自動付与
+- レスポンスパース: `choices[0].message.content` をJSON.parse
+
+### 4.9 プロンプト設計
+
+#### 4.9.1 システムプロンプト（全プロバイダー共通）
+
+```
+あなたは資格試験・学習向けの選択式クイズ問題を作成する専門家です。
+Web検索ツールで最新の一次情報・公式ドキュメント・信頼できる学習リソースを
+確認した上で、正確かつ実践的な問題を生成してください。
+
+# 出力契約（厳守）
+- 応答は必ず以下のJSON形式のみ。前置き・後置きの文章は一切含めない。
+- コードフェンス（```）で囲んでもよいが、JSON以外の文字列を含めない。
+
+{
+  "questions": [
+    {
+      "text": "<問題文>",
+      "choices": [
+        { "text": "<選択肢テキスト>", "isCorrect": true },
+        { "text": "<選択肢テキスト>", "isCorrect": false }
+      ],
+      "explanation": "<1〜3文の解説>"
+    }
+  ]
+}
+
+# 制約
+- 各問題の選択肢は必ず指定された個数。
+- 各問題には isCorrect:true が最低1つ必須。
+- 単一正解問題は isCorrect:true をちょうど1つにする。
+- 複数正解許可モードでも、全問を複数正解にはせず単一と複数を混在させる。
+- 選択肢の順序は正解が特定の位置に偏らないようにする。
+- 解説は「なぜ正解なのか」「他の選択肢がなぜ違うのか」を含む簡潔なもの。
+- 事実不明な場合は推測で問題を作らず、Web検索で裏取りしてから出題する。
+```
+
+#### 4.9.2 ユーザープロンプト（テンプレート）
+
+```
+# 生成依頼
+- テーマ / 資格名: {theme}
+- 出題範囲 / 詳細指示: {scope || "（指定なし：テーマの頻出範囲からバランスよく）"}
+- 出題言語: {language === "ja" ? "日本語" : "English"}
+- 問題数: {count} 問
+- 各問題の選択肢数: {choiceCount} 個
+- 複数正解の混在: {multiSelect ? "許可（全問ではなく一部のみ複数正解にする）" : "禁止（全問で正解は1つのみ）"}
+
+Web検索で最新情報・公式情報を確認した上で、上記条件を厳密に満たす
+クイズをJSONで出力してください。
+```
+
+### 4.10 プロンプトインジェクション対策
+
+- ユーザー入力（`theme`, `scope`）はテンプレート埋め込み前に以下をサニタイズ:
+  - 長さ上限: `theme` 100文字 / `scope` 500文字
+  - 改行文字（`\n`, `\r`）を半角スペースに置換（プロンプト構造破壊を防ぐ）
+  - バッククォート `` ` `` をエスケープ（コードフェンス脱出を防ぐ）
+  - 制御文字の除去
+- 生成結果は必ずクライアント側スキーマバリデーション（zod）を通す
+- 正解数が0の問題、選択肢数が指定と異なる問題は不正として再生成を促す
+- システムプロンプトは固定文字列としてコード内に保持（ユーザー入力が混入しない構造）
 
 ---
 
@@ -398,9 +599,10 @@ useReducer + Context API
 | Context | 状態 |
 |---------|------|
 | ExamContext | 試験CRUD、問題の追加/編集/削除 |
-| PlayContext | プレイ状態、回答、出題数、スコア |
+| PlayContext | プレイ状態、回答、出題数、スコア（メモリのみ。リロード・バック操作で破棄） |
 | HistoryContext | 履歴一覧、削除 |
 | SettingsContext | プロバイダー、APIキー×3、モデル名 |
+| AIPreviewContext | AI生成プレビュー配列（メモリのみ。S-003を離れたタイミングでクリア） |
 
 ### 5.2 AnswerReviewコンポーネント（共通）
 
@@ -415,7 +617,38 @@ useReducer + Context API
 
 ---
 
-### 5.3 デザイントークン（Tailwind `theme.extend.colors`）
+### 5.3 HTTPクライアント抽象化
+
+Web / ネイティブ環境でAI APIの呼び出し方法が異なるため、プロバイダー抽象化層の下にHTTPクライアント抽象化層を設ける。
+
+```
+httpClient.js
+  - isNative = Capacitor.isNativePlatform()
+  - request(config): isNative ? CapacitorHttp.request : fetch
+```
+
+- **Web環境**: 通常の `fetch` を使用。Anthropic呼び出し時は `anthropic-dangerous-direct-browser-access: true` ヘッダー、OpenAIは `dangerouslyAllowBrowser: true` 相当の直接呼び出しを行う
+- **ネイティブ環境（Capacitor）**: `@capacitor/http`（CapacitorHttp）プラグインを使用してCORS制約を回避
+- プロバイダー実装（`AnthropicProvider` 等）はこの抽象化層のみを参照し、環境差異を意識しない
+
+### 5.4 ルーティング設計
+
+| パス | ページ | 備考 |
+|------|--------|------|
+| `/` | HomePage | S-001 |
+| `/exams/new` | ExamCreatePage | S-002a |
+| `/exams/:id/edit` | ExamEditPage | S-002b |
+| `/exams/:id/questions` | QuestionManagePage | S-003 |
+| `/exams/:id/questions/:qid/edit` | QuestionEditPage | S-003b（既存問題編集） |
+| `/exams/:id/questions/edit?source=preview&index=N` | QuestionEditPage | S-003b（AIプレビュー編集。クエリで識別） |
+| `/play/:id` | PlayPage | S-005 |
+| `/play/:id/result` | ResultPage | S-006 |
+| `/history` | HistoryPage | S-007 |
+| `/settings` | SettingsPage | S-008 |
+
+> ※ GitHub Pages デプロイを想定するため、`vite.config.js` で `base: "/<リポジトリ名>/"` を設定し、`BrowserRouter` の `basename` も同値にする（または `HashRouter` を使用）。
+
+### 5.5 デザイントークン（Tailwind `theme.extend.colors`）
 
 ワイヤーフレーム準拠のブランドカラーを Tailwind に定義し、デフォルト色は使用しない。
 
@@ -454,7 +687,8 @@ Capacitor でPWA化し、同じコードベースからiOS / Androidネイティ
 - モバイルファーストデザイン
 - アイコン / スプラッシュは当面プレースホルダSVGで運用し、本番素材は後日差し替え
 - ネイティブ環境のストレージは当面 `localStorage` を共通利用（将来 `@capacitor/preferences` への移行余地を残す）
-- AI APIはネイティブでも同様にブラウザ（WebView）から直接呼び出す想定（dangerousフラグ付き）
+- AI APIはWeb環境では `fetch` + dangerousフラグ、ネイティブ環境では `@capacitor/http`（CapacitorHttp）経由で呼び出す。環境判定は `Capacitor.isNativePlatform()` を使用
+- 開発順序: まずWeb版（Vite + PWA）を完成させ、その後 `npx cap add ios` / `npx cap add android` でネイティブラッパーを追加する
 
 ### manifest.json
 
@@ -495,6 +729,7 @@ ai-quiz-forge/
       PlayContext.jsx
       HistoryContext.jsx
       SettingsContext.jsx
+      AIPreviewContext.jsx  # AI生成プレビュー（メモリのみ、S-003離脱でクリア）
     pages/
       HomePage.jsx
       ExamCreatePage.jsx
@@ -509,7 +744,8 @@ ai-quiz-forge/
       index.js             # getProvider ファクトリ
       anthropic.js         # AnthropicProvider
       openai.js            # OpenAIProvider
-      openrouter.js        # OpenRouterProvider
+      openrouter.js        # OpenRouterProvider（:onlineサフィックス自動付与）
+      httpClient.js        # Web(fetch) / Native(CapacitorHttp) 切替
     hooks/
       useLocalStorage.js
       useAIGenerate.js
@@ -581,6 +817,32 @@ ESLint 9+ Flat Config形式（`eslint.config.js`）
 - **保存時ESLint自動修正:** `editor.codeActionsOnSave: { source.fixAll.eslint: "explicit" }`
 - **Viteビルド時:** `vite-plugin-eslint`でESLintチェック
 - **推奨拡張:** ESLint (`dbaeumer.vscode-eslint`), Prettier (`esbenp.prettier-vscode`), Tailwind CSS IntelliSense (`bradlc.vscode-tailwindcss`)
+
+---
+
+## 8.5 ビルド / デプロイ / テスト方針
+
+### パッケージマネージャ
+- **npm** を使用。`package-lock.json` をリポジトリに含める
+
+### デプロイ
+- **Web**: GitHub Pages にデプロイ
+  - `vite.config.js` の `base` をリポジトリ名に合わせて設定
+  - GitHub Actions で `main` ブランチ更新時に `npm run build` → `gh-pages` ブランチへ成果物を push
+- **iOS / Android**: 後続フェーズで `npx cap add ios` / `npx cap add android` 実行後、Xcode / Android Studio からビルド
+
+### 開発順序
+1. Web版のスキャフォールド（Vite + React + Tailwind + ESLint/Prettier）
+2. localStorage層・Context層・ルーティング
+3. 画面実装（S-001 → S-002 → S-003 → S-003b → S-005 → S-006 → S-007 → S-008 の順）
+4. AIプロバイダー抽象化＋HTTPクライアント抽象化（Web版 fetch のみ先行）
+5. PWA化（manifest.json / Service Worker / プレースホルダアイコン）
+6. GitHub Pages デプロイ
+7. Capacitor 追加（`npx cap add ios/android`）＋ `CapacitorHttp` 切替対応
+
+### テスト方針
+- **MVPではユニットテスト / E2Eテストは実装しない**。手動動作確認で検収
+- 将来的には Vitest（ユニット）・Playwright（E2E）の導入を検討
 
 ---
 
