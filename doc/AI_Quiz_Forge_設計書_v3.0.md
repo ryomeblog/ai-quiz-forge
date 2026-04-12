@@ -58,6 +58,9 @@ AIがWeb検索を行い、最新情報に基づいた選択式クイズを自動
 |----------|------|------|
 | フロントエンド | React 18+ | UIコンポーネント |
 | スタイリング | Tailwind CSS | ユーティリティCSS |
+| UIコンポーネント | @headlessui/react | アコーディオン / ダイアログ / タブ / スイッチ |
+| アイコン | react-icons | Feather (`fi`) / Heroicons v2 (`hi2`) を使用 |
+| トースト | react-hot-toast | エラー通知・保存成功等 |
 | ビルド | Vite | 開発サーバー・ビルド |
 | PWA / ネイティブ | Capacitor | Web（Service Worker / manifest）+ iOS / Android ラッパー |
 | AI | Anthropic / OpenAI / OpenRouter | 問題生成+Web検索 |
