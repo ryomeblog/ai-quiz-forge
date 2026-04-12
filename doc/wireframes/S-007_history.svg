@@ -1,0 +1,51 @@
+<svg width="100%" viewBox="0 0 680 1080" xmlns="http://www.w3.org/2000/svg">
+<title>S-007 履歴画面</title>
+<desc>2階層アコーディオン。試験単位→問題単位。展開でS-006と同じ選択肢表示。</desc>
+<style>text{font-family:-apple-system,sans-serif}.th{font-size:14px;font-weight:500;fill:#1A1A1A}.ts{font-size:12px;fill:#888880}</style>
+<rect x="140" y="20" width="400" height="1020" rx="24" fill="#FFF" stroke="#CCC" stroke-width="1"/>
+<text class="ts" x="170" y="48">9:41</text><text class="ts" x="500" y="48" text-anchor="end">100%</text>
+<text x="340" y="80" text-anchor="middle" font-size="16" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">プレイ履歴</text>
+<rect x="175" y="100" width="330" height="50" rx="8" fill="#F8F8F6" stroke="#CCC" stroke-width="0.5"/>
+<text x="190" y="120" font-size="13" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">AWS SAA 模擬試験</text>
+<text class="ts" x="190" y="140">2026/04/11 14:30 ・ 84% (21/25)</text>
+<text x="492" y="126" text-anchor="end" font-size="12" fill="#888780" font-family="-apple-system,sans-serif">v</text>
+<rect x="175" y="160" width="330" height="50" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="190" y="180" font-size="13" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">日本史 基礎問題集</text>
+<text class="ts" x="190" y="200">2026/04/10 09:15 ・ 70% (7/10)</text>
+<text x="492" y="186" text-anchor="end" font-size="12" fill="#185FA5" font-family="-apple-system,sans-serif">^</text>
+<rect x="175" y="214" width="330" height="390" rx="0" fill="#FFF" stroke="#CCC" stroke-width="0.5"/>
+<rect x="190" y="228" width="300" height="30" rx="4" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="204" y="247" font-size="12" fill="#27500A" font-family="-apple-system,sans-serif">O Q1: 関ヶ原の戦いが起きた年...</text>
+<rect x="190" y="266" width="300" height="30" rx="4" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="204" y="285" font-size="12" fill="#791F1F" font-family="-apple-system,sans-serif">X Q2: 織田信長の本拠地はどこ...</text>
+<text x="480" y="285" text-anchor="end" font-size="12" fill="#791F1F" font-family="-apple-system,sans-serif">^</text>
+<rect x="190" y="300" width="300" height="160" rx="0" fill="#FFF" stroke="#CCC" stroke-width="0.5"/>
+<text x="204" y="320" font-size="13" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">織田信長の本拠地はどこですか？</text>
+<text class="ts" x="204" y="340">選択肢:</text>
+<rect x="204" y="348" width="272" height="20" rx="3" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="216" y="362" font-size="11" fill="#27500A" font-family="-apple-system,sans-serif">  安土（正解）</text>
+<rect x="204" y="372" width="272" height="20" rx="3" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="216" y="386" font-size="11" fill="#791F1F" font-family="-apple-system,sans-serif">  大阪（あなたの回答）</text>
+<text x="216" y="408" font-size="11" fill="#888780" font-family="-apple-system,sans-serif">  京都</text>
+<text x="216" y="426" font-size="11" fill="#888780" font-family="-apple-system,sans-serif">  江戸</text>
+<text x="216" y="444" font-size="11" fill="#888780" font-family="-apple-system,sans-serif">  名古屋</text>
+<rect x="190" y="468" width="300" height="30" rx="4" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="204" y="487" font-size="12" fill="#27500A" font-family="-apple-system,sans-serif">O Q3: 豊臣秀吉が行った検地は...</text>
+<text class="ts" x="340" y="524" text-anchor="middle">... Q4〜Q10 スクロール</text>
+<rect x="175" y="618" width="330" height="50" rx="8" fill="#F8F8F6" stroke="#CCC" stroke-width="0.5"/>
+<text x="190" y="638" font-size="13" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">ITパスポート模擬</text>
+<text class="ts" x="190" y="658">2026/04/09 20:00 ・ 60% (9/15)</text>
+<rect x="175" y="690" width="330" height="36" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="340" y="712" text-anchor="middle" font-size="12" font-weight="500" fill="#791F1F" font-family="-apple-system,sans-serif">全履歴を削除</text>
+<rect x="140" y="968" width="400" height="72" fill="#111"/>
+<line x1="140" y1="968" x2="540" y2="968" stroke="#222" stroke-width="1"/>
+<path d="M225 992 L225 988 Q225 984,229 984 L241 984 Q245 984,245 988 L245 992 Z M222 994 L248 994 L248 1010 Q248 1014,244 1014 L226 1014 Q222 1014,222 1010 Z" fill="#666"/>
+<text x="235" y="1030" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">ホーム</text>
+<circle cx="340" cy="998" r="10" fill="none" stroke="#00E5FF" stroke-width="1.5"/>
+<path d="M336 996 L340 992 L344 996 M336 1002 L340 998 L344 1002" fill="none" stroke="#00E5FF" stroke-width="1.2"/>
+<text x="340" y="1030" text-anchor="middle" font-size="11" fill="#00E5FF" font-family="-apple-system,sans-serif">履歴</text>
+<circle cx="445" cy="1000" r="10" fill="none" stroke="#666" stroke-width="1.5"/>
+<circle cx="445" cy="1000" r="3" fill="none" stroke="#666" stroke-width="1.2"/>
+<text x="445" y="1030" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">設定</text>
+<text x="340" y="1072" text-anchor="middle" font-size="12" fill="#888880" font-family="-apple-system,sans-serif">S-007 履歴画面</text>
+</svg>

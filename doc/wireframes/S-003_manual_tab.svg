@@ -1,0 +1,76 @@
+<svg width="100%" viewBox="0 0 680 1140" xmlns="http://www.w3.org/2000/svg">
+<title>S-003 問題管理（手動作成タブ）</title>
+<desc>手動で問題を追加。選択肢ON/OFF・削除。単一/複数選択は正解ONの数から自動判定（2個以上で複数選択）。既存問題リストはタブ外に常時表示。</desc>
+<style>text{font-family:-apple-system,sans-serif}.th{font-size:14px;font-weight:500;fill:#1A1A1A}.ts{font-size:12px;fill:#888880}</style>
+<rect x="140" y="20" width="400" height="1080" rx="24" fill="#FFF" stroke="#CCC" stroke-width="1"/>
+<text class="ts" x="170" y="48">9:41</text><text class="ts" x="500" y="48" text-anchor="end">100%</text>
+<text class="ts" x="175" y="76">← 戻る</text>
+<text x="340" y="76" text-anchor="middle" font-size="14" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">AWS SAA 模擬試験</text>
+<text class="ts" x="340" y="92" text-anchor="middle">3問登録済み</text>
+<rect x="175" y="104" width="160" height="32" rx="6" fill="#185FA5"/>
+<text x="255" y="124" text-anchor="middle" font-size="12" font-weight="500" fill="#FFF" font-family="-apple-system,sans-serif">手動作成</text>
+<rect x="345" y="104" width="160" height="32" rx="6" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="425" y="124" text-anchor="middle" font-size="12" fill="#5F5E5A" font-family="-apple-system,sans-serif">AI生成</text>
+<text class="ts" x="175" y="162">問題文 *</text>
+<rect x="175" y="170" width="330" height="52" rx="6" fill="none" stroke="#B4B2A9" stroke-width="0.5"/>
+<text class="ts" x="190" y="196">S3バケットのアクセス制御で</text>
+<text class="ts" x="190" y="212">最も適切な方法はどれですか？</text>
+<text class="ts" x="175" y="244">選択肢（2〜10）</text><text class="ts" x="420" y="244" text-anchor="end">正解</text>
+<rect x="175" y="252" width="236" height="30" rx="4" fill="none" stroke="#B4B2A9" stroke-width="0.5"/>
+<text class="ts" x="188" y="271">バケットポリシー</text>
+<rect x="418" y="254" width="40" height="26" rx="4" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="438" y="271" text-anchor="middle" font-size="11" fill="#27500A" font-family="-apple-system,sans-serif">ON</text>
+<text x="470" y="271" font-size="14" fill="#A32D2D" font-family="-apple-system,sans-serif">x</text>
+<rect x="175" y="290" width="236" height="30" rx="4" fill="none" stroke="#B4B2A9" stroke-width="0.5"/>
+<text class="ts" x="188" y="309">セキュリティグループ</text>
+<rect x="418" y="292" width="40" height="26" rx="4" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="438" y="309" text-anchor="middle" font-size="11" fill="#888780" font-family="-apple-system,sans-serif">OFF</text>
+<text x="470" y="309" font-size="14" fill="#A32D2D" font-family="-apple-system,sans-serif">x</text>
+<rect x="175" y="328" width="236" height="30" rx="4" fill="none" stroke="#B4B2A9" stroke-width="0.5"/>
+<text class="ts" x="188" y="347">NACL</text>
+<rect x="418" y="330" width="40" height="26" rx="4" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="438" y="347" text-anchor="middle" font-size="11" fill="#888780" font-family="-apple-system,sans-serif">OFF</text>
+<text x="470" y="347" font-size="14" fill="#A32D2D" font-family="-apple-system,sans-serif">x</text>
+<rect x="175" y="366" width="236" height="30" rx="4" fill="none" stroke="#B4B2A9" stroke-width="0.5"/>
+<text class="ts" x="188" y="385">WAF</text>
+<rect x="418" y="368" width="40" height="26" rx="4" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="438" y="385" text-anchor="middle" font-size="11" fill="#888780" font-family="-apple-system,sans-serif">OFF</text>
+<text x="470" y="385" font-size="14" fill="#A32D2D" font-family="-apple-system,sans-serif">x</text>
+<text x="175" y="418" font-size="12" fill="#185FA5" font-family="-apple-system,sans-serif">+ 選択肢を追加</text>
+<rect x="175" y="434" width="330" height="40" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="340" y="458" text-anchor="middle" font-size="13" font-weight="500" fill="#0C447C" font-family="-apple-system,sans-serif">この問題を追加</text>
+<line x1="175" y1="494" x2="505" y2="494" stroke="#CCC" stroke-width="0.5"/>
+<text x="175" y="516" font-size="14" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">登録済みの問題</text>
+<rect x="175" y="528" width="330" height="64" rx="6" fill="#F8F8F6" stroke="#CCC" stroke-width="0.5"/>
+<text x="190" y="550" font-size="13" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">Q1: S3バケットのアクセス制御で...</text>
+<text class="ts" x="190" y="572">4択・単一選択</text>
+<rect x="400" y="566" width="32" height="18" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="416" y="578" text-anchor="middle" font-size="11" fill="#0C447C" font-family="-apple-system,sans-serif">編集</text>
+<rect x="438" y="566" width="32" height="18" rx="3" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="454" y="578" text-anchor="middle" font-size="11" fill="#791F1F" font-family="-apple-system,sans-serif">削除</text>
+<rect x="175" y="604" width="330" height="64" rx="6" fill="#F8F8F6" stroke="#CCC" stroke-width="0.5"/>
+<text x="190" y="626" font-size="13" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">Q2: EC2インスタンスのスケーリ...</text>
+<text class="ts" x="190" y="648">5択・単一選択</text>
+<rect x="400" y="642" width="32" height="18" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="416" y="654" text-anchor="middle" font-size="11" fill="#0C447C" font-family="-apple-system,sans-serif">編集</text>
+<rect x="438" y="642" width="32" height="18" rx="3" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="454" y="654" text-anchor="middle" font-size="11" fill="#791F1F" font-family="-apple-system,sans-serif">削除</text>
+<rect x="175" y="680" width="330" height="64" rx="6" fill="#F8F8F6" stroke="#CCC" stroke-width="0.5"/>
+<text x="190" y="702" font-size="13" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">Q3: VPCのサブネット設計で最も...</text>
+<text class="ts" x="190" y="724">4択・複数選択</text>
+<rect x="400" y="718" width="32" height="18" rx="3" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="416" y="730" text-anchor="middle" font-size="11" fill="#0C447C" font-family="-apple-system,sans-serif">編集</text>
+<rect x="438" y="718" width="32" height="18" rx="3" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>
+<text x="454" y="730" text-anchor="middle" font-size="11" fill="#791F1F" font-family="-apple-system,sans-serif">削除</text>
+<rect x="140" y="1028" width="400" height="72" fill="#111"/>
+<line x1="140" y1="1028" x2="540" y2="1028" stroke="#222" stroke-width="1"/>
+<path d="M225 1052 L225 1048 Q225 1044,229 1044 L241 1044 Q245 1044,245 1048 L245 1052 Z M222 1054 L248 1054 L248 1070 Q248 1074,244 1074 L226 1074 Q222 1074,222 1070 Z" fill="#00E5FF"/>
+<text x="235" y="1090" text-anchor="middle" font-size="11" fill="#00E5FF" font-family="-apple-system,sans-serif">ホーム</text>
+<circle cx="340" cy="1058" r="10" fill="none" stroke="#666" stroke-width="1.5"/>
+<path d="M336 1056 L340 1052 L344 1056 M336 1062 L340 1058 L344 1062" fill="none" stroke="#666" stroke-width="1.2"/>
+<text x="340" y="1090" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">履歴</text>
+<circle cx="445" cy="1060" r="10" fill="none" stroke="#666" stroke-width="1.5"/>
+<circle cx="445" cy="1060" r="3" fill="none" stroke="#666" stroke-width="1.2"/>
+<text x="445" y="1090" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">設定</text>
+<text x="340" y="1134" text-anchor="middle" font-size="12" fill="#888880" font-family="-apple-system,sans-serif">S-003 問題管理（手動タブ）</text>
+</svg>

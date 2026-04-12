@@ -1,0 +1,33 @@
+<svg width="100%" viewBox="0 0 680 700" xmlns="http://www.w3.org/2000/svg">
+<title>S-002b 試験編集画面</title>
+<desc>既存試験のタイトル・説明を編集。プリフィル済み。保存後ホームへ。</desc>
+<style>text{font-family:-apple-system,sans-serif}.th{font-size:14px;font-weight:500;fill:#1A1A1A}.ts{font-size:12px;fill:#888880}</style>
+<rect x="140" y="20" width="400" height="640" rx="24" fill="#FFF" stroke="#CCC" stroke-width="1"/>
+<text class="ts" x="170" y="52">9:41</text><text class="ts" x="500" y="52" text-anchor="end">100%</text>
+<text class="ts" x="175" y="82">← キャンセル</text>
+<text x="340" y="82" text-anchor="middle" font-size="16" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">試験を編集</text>
+<text class="ts" x="175" y="120">試験タイトル *</text>
+<rect x="175" y="128" width="330" height="36" rx="6" fill="none" stroke="#185FA5" stroke-width="1"/>
+<text x="190" y="150" font-size="12" fill="#1A1A1A" font-family="-apple-system,sans-serif">AWS SAA 模擬試験</text>
+<text class="ts" x="175" y="190">説明（任意）</text>
+<rect x="175" y="198" width="330" height="72" rx="6" fill="none" stroke="#185FA5" stroke-width="1"/>
+<text x="190" y="224" font-size="12" fill="#1A1A1A" font-family="-apple-system,sans-serif">S3, EC2, VPCを中心とした</text>
+<text x="190" y="244" font-size="12" fill="#1A1A1A" font-family="-apple-system,sans-serif">シナリオベースの問題集</text>
+<text class="ts" x="175" y="298">登録済み問題数: 25問</text>
+<rect x="175" y="316" width="155" height="48" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="252" y="344" text-anchor="middle" font-size="14" font-weight="500" fill="#0C447C" font-family="-apple-system,sans-serif">保存</text>
+<rect x="350" y="316" width="155" height="48" rx="8" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="428" y="344" text-anchor="middle" font-size="13" fill="#5F5E5A" font-family="-apple-system,sans-serif">キャンセル</text>
+<text class="ts" x="340" y="400" text-anchor="middle">保存後、ホーム画面に戻ります</text>
+<rect x="140" y="588" width="400" height="72" fill="#111"/>
+<line x1="140" y1="588" x2="540" y2="588" stroke="#222" stroke-width="1"/>
+<path d="M225 612 L225 608 Q225 604,229 604 L241 604 Q245 604,245 608 L245 612 Z M222 614 L248 614 L248 630 Q248 634,244 634 L226 634 Q222 634,222 630 Z" fill="#00E5FF"/>
+<text x="235" y="650" text-anchor="middle" font-size="11" fill="#00E5FF" font-family="-apple-system,sans-serif">ホーム</text>
+<circle cx="340" cy="618" r="10" fill="none" stroke="#666" stroke-width="1.5"/>
+<path d="M336 616 L340 612 L344 616 M336 622 L340 618 L344 622" fill="none" stroke="#666" stroke-width="1.2"/>
+<text x="340" y="650" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">履歴</text>
+<circle cx="445" cy="620" r="10" fill="none" stroke="#666" stroke-width="1.5"/>
+<circle cx="445" cy="620" r="3" fill="none" stroke="#666" stroke-width="1.2"/>
+<text x="445" y="650" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">設定</text>
+<text x="340" y="692" text-anchor="middle" font-size="12" fill="#888880" font-family="-apple-system,sans-serif">S-002b 試験編集画面</text>
+</svg>

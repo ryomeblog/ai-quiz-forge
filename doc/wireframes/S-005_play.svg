@@ -1,0 +1,83 @@
+<svg width="100%" viewBox="0 0 680 920" xmlns="http://www.w3.org/2000/svg">
+<title>S-005 プレイ画面</title>
+<desc>左: 単一選択(途中問題,前へ/次へ) 右: 複数選択(最終問題,前へ/回答する)。未回答でも進行可（不正解扱い）。問題順・選択肢順ともシャッフル。ボトムナビ操作時は確認ダイアログを表示しデータ破棄。</desc>
+<style>text{font-family:-apple-system,sans-serif}.th{font-size:14px;font-weight:500;fill:#1A1A1A}.ts{font-size:12px;fill:#888880}</style>
+<rect x="20" y="20" width="310" height="840" rx="20" fill="#FFF" stroke="#CCC" stroke-width="1"/>
+<text class="ts" x="42" y="48">9:41</text><text class="ts" x="300" y="48" text-anchor="end">100%</text>
+<text x="175" y="72" text-anchor="middle" font-size="14" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">3 / 10</text>
+<rect x="42" y="82" width="266" height="5" rx="2.5" fill="#F1EFE8"/>
+<rect x="42" y="82" width="80" height="5" rx="2.5" fill="#185FA5"/>
+<text class="ts" x="42" y="110">Q3 ・ 単一選択</text>
+<rect x="42" y="118" width="266" height="48" rx="6" fill="#F8F8F6" stroke="#CCC" stroke-width="0.5"/>
+<text x="56" y="138" font-size="13" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">S3バケットのアクセス制御で</text>
+<text x="56" y="156" font-size="13" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">最も適切な方法はどれですか？</text>
+<circle cx="58" cy="192" r="7" fill="none" stroke="#B4B2A9" stroke-width="1"/>
+<text class="ts" x="74" y="196">バケットポリシー</text>
+<circle cx="58" cy="222" r="7" fill="none" stroke="#185FA5" stroke-width="2"/>
+<circle cx="58" cy="222" r="3.5" fill="#185FA5"/>
+<text class="ts" x="74" y="226">セキュリティグループ</text>
+<circle cx="58" cy="252" r="7" fill="none" stroke="#B4B2A9" stroke-width="1"/>
+<text class="ts" x="74" y="256">NACL</text>
+<circle cx="58" cy="282" r="7" fill="none" stroke="#B4B2A9" stroke-width="1"/>
+<text class="ts" x="74" y="286">WAF</text>
+<rect x="42" y="312" width="126" height="36" rx="6" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="105" y="334" text-anchor="middle" font-size="12" fill="#5F5E5A" font-family="-apple-system,sans-serif">← 前へ</text>
+<rect x="182" y="312" width="126" height="36" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="245" y="334" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C" font-family="-apple-system,sans-serif">次へ →</text>
+<text class="ts" x="175" y="376" text-anchor="middle">正解は結果画面で確認できます</text>
+<text class="ts" x="175" y="392" text-anchor="middle">未回答でも「次へ」可能（不正解扱い）</text>
+<rect x="20" y="788" width="310" height="72" fill="#111"/>
+<line x1="20" y1="788" x2="330" y2="788" stroke="#222" stroke-width="1"/>
+<path d="M90 812 L90 808 Q90 804,94 804 L106 804 Q110 804,110 808 L110 812 Z M87 814 L113 814 L113 830 Q113 834,109 834 L91 834 Q87 834,87 830 Z" fill="#666"/>
+<text x="100" y="850" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">ホーム</text>
+<circle cx="175" cy="818" r="10" fill="none" stroke="#666" stroke-width="1.5"/>
+<path d="M171 816 L175 812 L179 816 M171 822 L175 818 L179 822" fill="none" stroke="#666" stroke-width="1.2"/>
+<text x="175" y="850" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">履歴</text>
+<circle cx="250" cy="820" r="10" fill="none" stroke="#666" stroke-width="1.5"/>
+<circle cx="250" cy="820" r="3" fill="none" stroke="#666" stroke-width="1.2"/>
+<text x="250" y="850" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">設定</text>
+<text class="ts" x="175" y="880" text-anchor="middle">単一選択（途中問題）</text>
+<rect x="350" y="20" width="310" height="840" rx="20" fill="#FFF" stroke="#CCC" stroke-width="1"/>
+<text class="ts" x="372" y="48">9:41</text><text class="ts" x="630" y="48" text-anchor="end">100%</text>
+<text x="505" y="72" text-anchor="middle" font-size="14" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">10 / 10</text>
+<rect x="372" y="82" width="266" height="5" rx="2.5" fill="#F1EFE8"/>
+<rect x="372" y="82" width="266" height="5" rx="2.5" fill="#185FA5"/>
+<text class="ts" x="372" y="110">Q10 ・ 複数選択</text>
+<rect x="468" y="98" width="56" height="16" rx="4" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text x="496" y="110" text-anchor="middle" font-size="11" fill="#3C3489" font-family="-apple-system,sans-serif">すべて選べ</text>
+<rect x="372" y="118" width="266" height="48" rx="6" fill="#F8F8F6" stroke="#CCC" stroke-width="0.5"/>
+<text x="386" y="138" font-size="13" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">豊臣秀吉が実施した政策を</text>
+<text x="386" y="156" font-size="13" font-weight="500" fill="#1A1A1A" font-family="-apple-system,sans-serif">すべて選びなさい。</text>
+<rect x="384" y="182" width="12" height="12" rx="2" fill="none" stroke="#185FA5" stroke-width="1.5"/>
+<path d="M387 188 L390 191 L396 185" fill="none" stroke="#185FA5" stroke-width="1.2"/>
+<text class="ts" x="404" y="193">太閤検地</text>
+<rect x="384" y="206" width="12" height="12" rx="2" fill="none" stroke="#185FA5" stroke-width="1.5"/>
+<path d="M387 212 L390 215 L396 209" fill="none" stroke="#185FA5" stroke-width="1.2"/>
+<text class="ts" x="404" y="217">刀狩令</text>
+<rect x="384" y="230" width="12" height="12" rx="2" fill="none" stroke="#B4B2A9" stroke-width="1"/>
+<text class="ts" x="404" y="241">参勤交代</text>
+<rect x="384" y="254" width="12" height="12" rx="2" fill="none" stroke="#B4B2A9" stroke-width="1"/>
+<text class="ts" x="404" y="265">楽市楽座</text>
+<rect x="384" y="278" width="12" height="12" rx="2" fill="none" stroke="#B4B2A9" stroke-width="1"/>
+<text class="ts" x="404" y="289">鎖国令</text>
+<rect x="384" y="302" width="12" height="12" rx="2" fill="none" stroke="#B4B2A9" stroke-width="1"/>
+<text class="ts" x="404" y="313">武家諸法度</text>
+<rect x="372" y="336" width="126" height="36" rx="6" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="435" y="358" text-anchor="middle" font-size="12" fill="#5F5E5A" font-family="-apple-system,sans-serif">← 前へ</text>
+<rect x="512" y="336" width="126" height="36" rx="6" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="575" y="358" text-anchor="middle" font-size="12" font-weight="500" fill="#085041" font-family="-apple-system,sans-serif">回答する</text>
+<text class="ts" x="505" y="400" text-anchor="middle">最後の問題です</text>
+<text class="ts" x="505" y="416" text-anchor="middle">ボトムナビ操作時は確認ダイアログを表示</text>
+<rect x="350" y="788" width="310" height="72" fill="#111"/>
+<line x1="350" y1="788" x2="660" y2="788" stroke="#222" stroke-width="1"/>
+<path d="M420 812 L420 808 Q420 804,424 804 L436 804 Q440 804,440 808 L440 812 Z M417 814 L443 814 L443 830 Q443 834,439 834 L421 834 Q417 834,417 830 Z" fill="#666"/>
+<text x="430" y="850" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">ホーム</text>
+<circle cx="505" cy="818" r="10" fill="none" stroke="#666" stroke-width="1.5"/>
+<path d="M501 816 L505 812 L509 816 M501 822 L505 818 L509 822" fill="none" stroke="#666" stroke-width="1.2"/>
+<text x="505" y="850" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">履歴</text>
+<circle cx="580" cy="820" r="10" fill="none" stroke="#666" stroke-width="1.5"/>
+<circle cx="580" cy="820" r="3" fill="none" stroke="#666" stroke-width="1.2"/>
+<text x="580" y="850" text-anchor="middle" font-size="11" fill="#666" font-family="-apple-system,sans-serif">設定</text>
+<text class="ts" x="505" y="880" text-anchor="middle">複数選択（最終問題）</text>
+<text x="340" y="914" text-anchor="middle" font-size="12" fill="#888880" font-family="-apple-system,sans-serif">S-005 プレイ画面</text>
+</svg>
