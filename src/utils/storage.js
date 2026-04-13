@@ -6,6 +6,7 @@ export const KEYS = {
   apiKeyOpenAI: "aqf_apikey_openai",
   apiKeyOpenRouter: "aqf_apikey_openrouter",
   modelOpenRouter: "aqf_model_openrouter",
+  tutorialSeen: "aqf_tutorial_seen",
 };
 
 export function readJSON(key, fallback) {

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { FiDownload, FiUpload, FiTrash2 } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import { FiDownload, FiUpload, FiTrash2, FiBookOpen } from "react-icons/fi";
 import PageHeader from "../components/common/PageHeader.jsx";
 import ApiKeyInput from "../components/settings/ApiKeyInput.jsx";
 import ConfirmDialog from "../components/common/ConfirmDialog.jsx";
@@ -18,6 +19,7 @@ export default function SettingsPage() {
   const fileRef = useRef(null);
   const [pendingImport, setPendingImport] = useState(null);
   const [confirmClearAll, setConfirmClearAll] = useState(false);
+  const navigate = useNavigate();
 
   function handleExport() {
     downloadExport(exams, history);
@@ -64,9 +66,7 @@ export default function SettingsPage() {
         <section className="space-y-3 rounded-xl border border-brand-neutral-border bg-white p-4">
           <h2 className="text-sm font-semibold text-brand-ink">AIプロバイダー</h2>
           <div>
-            <label className="mb-1 block text-sm text-brand-neutral-text">
-              デフォルトプロバイダー
-            </label>
+            <label className="mb-1 block text-sm text-brand-neutral-text">プロバイダー</label>
             <select
               value={provider}
               onChange={(e) => setProvider(e.target.value)}
@@ -77,39 +77,62 @@ export default function SettingsPage() {
               <option value="openrouter">OpenRouter</option>
             </select>
           </div>
-          <ApiKeyInput
-            label="Anthropic APIキー"
-            value={apiKeys.anthropic}
-            onChange={(v) => setApiKey("anthropic", v)}
-          />
-          <ApiKeyInput
-            label="OpenAI APIキー"
-            value={apiKeys.openai}
-            onChange={(v) => setApiKey("openai", v)}
-          />
-          <ApiKeyInput
-            label="OpenRouter APIキー"
-            value={apiKeys.openrouter}
-            onChange={(v) => setApiKey("openrouter", v)}
-          />
-          <div>
-            <label className="mb-1 block text-sm font-medium text-brand-ink">
-              OpenRouter モデル名
-            </label>
-            <input
-              type="text"
-              value={openrouterModel}
-              onChange={(e) => setOpenrouterModel(e.target.value)}
-              placeholder="例: google/gemini-2.5-pro"
-              className="w-full rounded-md border border-brand-neutral-border bg-white px-3 py-2 text-sm font-mono"
+
+          {provider === "anthropic" && (
+            <ApiKeyInput
+              label="Anthropic APIキー"
+              value={apiKeys.anthropic}
+              onChange={(v) => setApiKey("anthropic", v)}
             />
-            <p className="mt-1 text-xs text-brand-neutral-text">
-              `:online` が無ければ自動付与されます
-            </p>
-          </div>
+          )}
+
+          {provider === "openai" && (
+            <ApiKeyInput
+              label="OpenAI APIキー"
+              value={apiKeys.openai}
+              onChange={(v) => setApiKey("openai", v)}
+            />
+          )}
+
+          {provider === "openrouter" && (
+            <>
+              <ApiKeyInput
+                label="OpenRouter APIキー"
+                value={apiKeys.openrouter}
+                onChange={(v) => setApiKey("openrouter", v)}
+              />
+              <div>
+                <label className="mb-1 block text-sm font-medium text-brand-ink">
+                  OpenRouter モデル名
+                </label>
+                <input
+                  type="text"
+                  value={openrouterModel}
+                  onChange={(e) => setOpenrouterModel(e.target.value)}
+                  placeholder="例: google/gemini-2.5-pro"
+                  className="w-full rounded-md border border-brand-neutral-border bg-white px-3 py-2 text-sm font-mono"
+                />
+                <p className="mt-1 text-xs text-brand-neutral-text">
+                  有料モデルは `:online` を自動付与（無料モデル `:free` には付けません）
+                </p>
+              </div>
+            </>
+          )}
+
           <p className="rounded-md bg-brand-danger-bg p-2 text-xs text-brand-danger-text">
             APIキーはこの端末に保存されます。共有端末では使用しないでください。
           </p>
+        </section>
+
+        <section className="space-y-3 rounded-xl border border-brand-neutral-border bg-white p-4">
+          <h2 className="text-sm font-semibold text-brand-ink">アプリの使い方</h2>
+          <button
+            type="button"
+            onClick={() => navigate("/tutorial")}
+            className="inline-flex items-center gap-1 rounded-md border border-brand-primary bg-brand-primary-bg px-3 py-2 text-sm text-brand-primary-text"
+          >
+            <FiBookOpen /> チュートリアルをもう一度見る
+          </button>
         </section>
 
         <section className="space-y-3 rounded-xl border border-brand-neutral-border bg-white p-4">
