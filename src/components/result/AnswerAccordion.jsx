@@ -54,6 +54,14 @@ export default function AnswerAccordion({ answers }) {
                       );
                     })}
                   </ul>
+                  {a.explanation && (
+                    <div className="mt-3 rounded-md border border-brand-neutral-border bg-brand-neutral-bg-alt p-2">
+                      <p className="mb-1 text-xs font-semibold text-brand-neutral-text">解説</p>
+                      <p className="whitespace-pre-wrap text-xs text-brand-ink">
+                        {a.explanation}
+                      </p>
+                    </div>
+                  )}
                 </Disclosure.Panel>
               </div>
             )}

@@ -31,6 +31,7 @@ export const AnswerRecordSchema = z.object({
   selectedChoiceIds: z.array(z.string()),
   correctChoiceIds: z.array(z.string()),
   isCorrect: z.boolean(),
+  explanation: z.string().nullable().optional(),
 });
 
 export const PlayHistorySchema = z.object({

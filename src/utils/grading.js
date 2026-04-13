@@ -14,6 +14,7 @@ export function gradeAnswers(session) {
       selectedChoiceIds: selected,
       correctChoiceIds: correctIds,
       isCorrect,
+      explanation: q.explanation ?? null,
     };
   });
   const score = answers.filter((a) => a.isCorrect).length;
