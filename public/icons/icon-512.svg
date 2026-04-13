@@ -1,4 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="80" fill="#185FA5"/>
-  <text x="256" y="300" text-anchor="middle" font-family="system-ui, sans-serif" font-size="190" font-weight="700" fill="#FFFFFF">QF</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="55%" stop-color="#185FA5"/>
+      <stop offset="100%" stop-color="#534AB7"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="40" fill="url(#g)"/>
+
+  <!-- Quiz card -->
+  <g transform="translate(36 46)">
+    <rect width="120" height="100" rx="12" fill="#FFFFFF"/>
+    <!-- Question lines -->
+    <rect x="14" y="14" width="80" height="6" rx="3" fill="#1A1A1A"/>
+    <rect x="14" y="24" width="56" height="4" rx="2" fill="#888780"/>
+
+    <!-- Choice A (unselected) -->
+    <g transform="translate(14 44)">
+      <circle cx="6" cy="6" r="5" fill="none" stroke="#D3D1C7" stroke-width="1.6"/>
+      <rect x="18" y="3" width="68" height="6" rx="3" fill="#888780"/>
+    </g>
+    <!-- Choice B (correct, selected) -->
+    <g transform="translate(14 62)">
+      <circle cx="6" cy="6" r="7.5" fill="#00E5FF"/>
+      <path d="M2.5 6 L5 8.5 L9.5 4" stroke="#185FA5" stroke-width="1.8"
+            fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="18" y="3" width="84" height="6" rx="3" fill="#1A1A1A"/>
+    </g>
+    <!-- Choice C (unselected) -->
+    <g transform="translate(14 80)">
+      <circle cx="6" cy="6" r="5" fill="none" stroke="#D3D1C7" stroke-width="1.6"/>
+      <rect x="18" y="3" width="50" height="6" rx="3" fill="#888780"/>
+    </g>
+  </g>
 </svg>
